@@ -37,7 +37,7 @@
 
 - 规划模型如下：
 
-  ![image-20220703114944055](C:\Users\86159\AppData\Roaming\Typora\typora-user-images\image-20220703114944055.png)
+![image](https://user-images.githubusercontent.com/84163279/181274075-dc1df45c-4137-4e6d-9f7f-f0be8a97f4a2.png)
 
 - 目标函数 1 表示转运过程中的总损耗。利用各家转运商负责的转运货物额与其各 自的损耗率相乘，为更确切体现对生产影响，又乘以各材料的转化率。各家转运商负责的转运货物额通过供应商的当周供应量与转运商在该供应量中负责的比例计算。
 
@@ -57,7 +57,7 @@
   3. 计算第1周库存，得到第2周期望的总供货量
   4. 依以上步骤依次求解第2周 - 第24周结果
 
-  ![image-20220703125251884](C:\Users\86159\AppData\Roaming\Typora\typora-user-images\image-20220703125251884.png)
+ ![image](https://user-images.githubusercontent.com/84163279/181274240-0109fbc6-9791-4571-97a6-1a904bf1f6d7.png)
 
 ### 4. 求解转运策略的遗传算法
 
@@ -83,7 +83,7 @@
 
 9. 在收集到历次迭代中的最优个体中选择所有迭代中最优个体输出
 
-![img](file:///C:\Users\86159\AppData\Local\Temp\ksohtml14836\wps1.jpg)
+![image](https://user-images.githubusercontent.com/84163279/181274356-c8fe80d6-1c36-452e-96d6-fde5a5d146dd.png)
 
 
 
@@ -91,7 +91,7 @@
 
 - 子模型三中目标函数为原材料损失导致的产品产量损失值，损失值越小越好，故目标函数值越小，个体的适应度越大。因此选择如下公式作为适应度函数。
 
-![img](file:///C:\Users\86159\AppData\Local\Temp\ksohtml14836\wps2.png)
+![image](https://user-images.githubusercontent.com/84163279/181274397-13f84611-e566-4d5e-802c-0c56e4fe61b0.png)
 
 #### 对约束条件的处理
 
@@ -113,7 +113,7 @@
 
 在本遗传算法的种群中，每个个体即为一种转运方案。若将两个个体的数据任意交换，会有很大概率令生成的子代不满足如下约束条件：
 
-![img](file:///C:\Users\86159\AppData\Local\Temp\ksohtml14836\wps3.png)
+![image](https://user-images.githubusercontent.com/84163279/181274479-40566249-4e50-4c5d-9538-8f7320e4c8f4.png)
 
 因此在交换时选择两种方案中某一家供应商的运输方案进行交换，具体的操作流程为：
 
@@ -125,7 +125,7 @@
 
 使用本交换算子得到的子代天然满足模型三4个约束条件中的3个：
 
-![img](file:///C:\Users\86159\AppData\Local\Temp\ksohtml14836\wps4.png)
+![image](https://user-images.githubusercontent.com/84163279/181274525-1e3b3150-ef6d-426e-bcb2-ca770a6813e0.png)
 
 ##### 变异算子的设计
 
@@ -133,13 +133,13 @@
 
 - 该算子分为两部分。
 
-- 第1步以一定概率对某个个体中某家供应商运输方案进行打乱重排序。当供应商只选择1家转运商时，重排序相当于更换该供应商的配送商。例如某家供货商的配送方案为![img](file:///C:\Users\86159\AppData\Local\Temp\ksohtml14836\wps5.png)，则经过变异算子计算后可能变为![img](file:///C:\Users\86159\AppData\Local\Temp\ksohtml14836\wps6.png)，相当于将该供应商选择的转运商从T4调整为T2.当供应商选择多家转运商时，重排序相当于将同样的数量的原材料交由不同转运商运输。例如原方案为![img](file:///C:\Users\86159\AppData\Local\Temp\ksohtml14836\wps7.png)，变异之后的方案为![img](file:///C:\Users\86159\AppData\Local\Temp\ksohtml14836\wps8.png)相当于将转运商从T2，T3，T6修改为T3，T4，T6，修改了供应商每批货的转运商，但是不修改每批货的数量。
+- 第1步以一定概率对某个个体中某家供应商运输方案进行打乱重排序。当供应商只选择1家转运商时，重排序相当于更换该供应商的配送商。例如某家供货商的配送方案为![image](https://user-images.githubusercontent.com/84163279/181274600-5730cdda-378a-447a-afe5-66f3a8d25d03.png)，则经过变异算子计算后可能变为![image](https://user-images.githubusercontent.com/84163279/181274652-cfcf57db-ac73-49d8-acf5-a0afd0c6bcc5.png)，相当于将该供应商选择的转运商从T4调整为T2.当供应商选择多家转运商时，重排序相当于将同样的数量的原材料交由不同转运商运输。例如原方案为![image](https://user-images.githubusercontent.com/84163279/181274718-75d0c166-287f-4c46-9162-343e972c6b56.png)，变异之后的方案为![image](https://user-images.githubusercontent.com/84163279/181274739-fa6e6125-c445-4f98-9551-419ef3370ee7.png)相当于将转运商从T2，T3，T6修改为T3，T4，T6，修改了供应商每批货的转运商，但是不修改每批货的数量。
 
-- 第2步针对供货量大于6000，选择多家转运商的供货商。同样以一定概率为其重新制定一个转运方案。例如方案![img](file:///C:\Users\86159\AppData\Local\Temp\ksohtml14836\wps9.png)在这一步可能变为![img](file:///C:\Users\86159\AppData\Local\Temp\ksohtml14836\wps10.png)，与之前的方案完全不同。
+- 第2步针对供货量大于6000，选择多家转运商的供货商。同样以一定概率为其重新制定一个转运方案。例如方案![image](https://user-images.githubusercontent.com/84163279/181274778-a273839e-8eb6-4c7a-861c-e21e219ecd79.png)在这一步可能变为![image](https://user-images.githubusercontent.com/84163279/181274810-ea2cd700-eb08-43ea-b197-de03eec35491.png)，与之前的方案完全不同。
 
 - 通过2步变异得到的新个体同样天然满足模型三中4个约束条件的3个：
 
-![img](file:///C:\Users\86159\AppData\Local\Temp\ksohtml14836\wps11.png)
+![image](https://user-images.githubusercontent.com/84163279/181274835-49ca9623-78e9-4acb-9a9f-0d732f3166f9.png)
 
 #### 其他优化
 
@@ -178,4 +178,4 @@ while True:
         return array
 ```
 
-![img](file:///C:\Users\86159\AppData\Local\Temp\ksohtml14836\wps14.png)
+![image](https://user-images.githubusercontent.com/84163279/181274889-fc5dd3a6-8b06-4e7a-bb07-9a1a42637144.png)
